@@ -23,6 +23,7 @@ Database: MySQL
 Architecture: MVC (Model-View-Controller)
 
 🎯 Key Features
+reyshell
 
 ✅ Easy setup and configuration
 
