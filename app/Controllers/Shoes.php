@@ -14,6 +14,28 @@ class Shoes extends Controller
         $data['shoes'] = $model->findAll();
         return view('shoes/index', $data);
     }
+
+    public function save(){
+        $name = $this->request->getPost('name');
+        $size = $this->request->getPost('size');
+        $color = $this->request->getPost('color');
+
+        $userModel = new \App\Models\ShoesModel();
+        $logModel = new LogModel();
+
+        $data = [
+            'name'       => $name,
+            'size'       => $size,
+            'color'    => $color
+        ];
+
+        if ($userModel->insert($data)) {
+            $logModel->addLog('New Shoes has been added: ' . $name, 'ADD');
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to save Shoes']);
+        }
+    }
     public function fetchRecords()
 {
     $request = service('request');
