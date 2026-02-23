@@ -65,7 +65,37 @@ class Shoes extends Controller
         ]);
     }
 }
-    public function fetchRecords()
+
+public function edit($id){
+    $model = new ShoesModel();
+$user = $model->find($id); // Fetch user by ID
+
+if ($user) {
+    return $this->response->setJSON(['data' => $user]); // Return user data as JSON
+} else {
+    return $this->response->setStatusCode(404)->setJSON(['error' => 'User not found']);
+}
+}
+
+public function delete($id){
+$model = new ShoesModel();
+$logModel = new LogModel();
+$user = $model->find($id);
+if (!$user) {
+    return $this->response->setJSON(['success' => false, 'message' => 'Shoes not found.']);
+}
+
+$deleted = $model->delete($id);
+
+if ($deleted) {
+    $logModel->addLog('Delete Profiling', 'DELETED');
+    return $this->response->setJSON(['success' => true, 'message' => 'Shoes deleted successfully.']);
+} else {
+    return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete Shoes.']);
+}
+}
+  
+public function fetchRecords()
 {
     $request = service('request');
     $model = new \App\Models\ShoesModel();
