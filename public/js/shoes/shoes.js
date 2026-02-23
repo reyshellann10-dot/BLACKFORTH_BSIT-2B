@@ -17,12 +17,12 @@ $('#addUserForm').on('submit', function (e) {
             if (response.status === 'success') {
                 $('#AddNewModal').modal('hide');
                 $('#addUserForm')[0].reset();
-                showToast('success', 'Shoes added successfully!');
+                showToast('success', 'User added successfully!');
                 setTimeout(() => {
                     location.reload();
                 }, 1000); 
             } else {
-                showToast('error', response.message || 'Failed to add person.');
+                showToast('error', response.message || 'Failed to add user.');
             }
         },
         error: function () {
@@ -40,16 +40,16 @@ $(document).on('click', '.edit-btn', function () {
     success: function (response) {
         if (response.data) {
             $('#editUserModal #name').val(response.data.name);
-            $('#editUserModal #id').val(response.data.id);
+            $('#editUserModal #userId').val(response.data.id);
             $('#editUserModal #size').val(response.data.size);
             $('#editUserModal #color').val(response.data.color);
             $('#editUserModal').modal('show');
         } else {
-            alert('Error fetching shoes data');
+            alert('Error fetching user data');
         }
     },
     error: function () {
-        alert('Error fetching shoes data');
+        alert('Error fetching user data');
     }
 });
 });
@@ -67,7 +67,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     $('#editUserModal').modal('hide');
-                    showToast('success', 'Shoes Updated successfully!');
+                    showToast('success', 'User Updated successfully!');
                     setTimeout(() => location.reload(), 1000);
                 } else {
                     alert('Error updating: ' + (response.message || 'Unknown error'));
@@ -86,7 +86,7 @@ $(document).on('click', '.deleteUserBtn', function () {
     const csrfName = $('meta[name="csrf-name"]').attr('content');
     const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-    if (confirm('Are you sure you want to delete this person?')) {
+    if (confirm('Are you sure you want to delete this user?')) {
         $.ajax({
             url: baseUrl + 'shoes/delete/' + userId,
             method: 'POST', 
@@ -96,7 +96,7 @@ $(document).on('click', '.deleteUserBtn', function () {
             },
             success: function (response) {
                 if (response.success) {
-                    showToast('success', 'Shoes deleted successfully.');
+                    showToast('success', 'shoes deleted successfully.');
                     setTimeout(() => location.reload(), 1000);
                 } else {
                     alert(response.message || 'Failed to delete.');
@@ -131,6 +131,7 @@ $(document).ready(function () {
         { data: 'name' },
         { data: 'size' },
         { data: 'color' },
+    
         {
             data: null,
             orderable: false,
@@ -149,5 +150,11 @@ $(document).ready(function () {
         ],
         responsive: true,
         autoWidth: false
+
+        
     });
+  
 });
+   
+    
+    

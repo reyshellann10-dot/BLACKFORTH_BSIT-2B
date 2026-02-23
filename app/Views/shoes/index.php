@@ -105,17 +105,17 @@
 
              <div class="form-group">
                 <label>Name</label>
-                <input type="text" name="name" id="name" class="form-control" required />
+                <input type="text" name="name" id="name" class="form-control" required>
               </div>
 
             <div class="form-group">
-              <label for="Size">Size</label>
-              <input type="text" class="form-control" id="size" name="size" required>
+              <label for="size">Size</label>
+              <input type="text" class="form-control" id="size" name="size" required />
             </div>
 
             <div class="form-group">
-              <label for="Color">Color</label>
-              <input type="text" class="form-control" id="color" name="color">
+              <label for="color">Color</label>
+              <input type="text" class="form-control" id="color" name="color" required>
             </div>  
             
           </div>

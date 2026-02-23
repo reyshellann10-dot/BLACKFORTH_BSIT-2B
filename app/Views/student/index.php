@@ -117,8 +117,8 @@
             </div>
 
             <div class="form-group">
-              <label for="password">Address</label>
-              <input type="address" class="form-control" id="address" name="password">
+              <label for="address">Address</label>
+              <input type="address" class="form-control" id="address" name="address">
             </div>  
 
              
