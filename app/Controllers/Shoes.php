@@ -14,10 +14,7 @@ class Shoes extends Controller
         $data['shoes'] = $model->findAll();
         return view('shoes/index', $data);
     }
-
-
-
-public function fetchRecords()
+    public function fetchRecords()
 {
     $request = service('request');
     $model = new \App\Models\ShoesModel();
@@ -43,5 +40,10 @@ public function fetchRecords()
         'data' => $data,
     ]);
 }
+
+
+
+
+
 
 }
