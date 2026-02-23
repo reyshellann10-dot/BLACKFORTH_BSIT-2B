@@ -14,8 +14,7 @@ class Shoes extends Controller
         $data['shoes'] = $model->findAll();
         return view('shoes/index', $data);
     }
-
-    public function save(){
+ public function save(){
         $name = $this->request->getPost('name');
         $size = $this->request->getPost('size');
         $color = $this->request->getPost('color');
@@ -35,7 +34,37 @@ class Shoes extends Controller
         } else {
             return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to save Shoes']);
         }
+ }
+
+ public function update(){
+    $model = new ShoesModel();
+    $logModel = new LogModel();
+    $userId = $this->request->getPost('id');
+    $name = $this->request->getPost('name');
+    $size = $this->request->getPost('size');
+    $color = $this->request->getPost('color');
+
+    $userData = [
+        'name'       => $name,
+        'size'       => $size,
+        'color'    => $color
+    ];
+
+    $updated = $model->update($userId, $userData);
+
+    if ($updated) {
+        $logModel->addLog('New Shoes has been apdated: ' . $name, 'UPDATED');
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Shoes updated successfully.'
+        ]);
+    } else {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Error updating Shoes.'
+        ]);
     }
+}
     public function fetchRecords()
 {
     $request = service('request');
@@ -62,7 +91,6 @@ class Shoes extends Controller
         'data' => $data,
     ]);
 }
-
 
 
 
